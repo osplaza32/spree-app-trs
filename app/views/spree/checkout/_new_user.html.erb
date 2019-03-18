@@ -1,0 +1,12 @@
+
+<%= Spree.t(:create_a_new_account) %>
+<%= form_for @user, :as => :spree_user, :url => spree.registration_path(@user) do |f| %>
+<%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>
+
+<%= f.submit Spree.t(:create), :class => 'btn btn-lg btn-success btn-block' %>
+<% end %>
+<%= Spree.t(:or) %> 
+
+
+<br>
+<strong ><%= link_to Spree.t(:login_as_existing), spree.login_path, class: "login_as_existing" %></strong>

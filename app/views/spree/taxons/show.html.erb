@@ -1,0 +1,14 @@
+<% content_for :sidebar do %>
+  <div data-hook="taxon_sidebar_navigation">
+    <%= render partial: 'spree/shared/subtaxonomies', locals: { taxon: @taxon } if @taxon.id != 1 %>
+    <%= render partial: 'spree/shared/taxonomies' if @taxon.id == 1 %>
+  </div>
+<% end %>
+
+<div class="titleCat">
+  <h2 class="taxon-title"><%= @taxon.name %></h2>
+</div>
+
+<div data-hook="taxon_products">
+  <%= render partial: 'spree/shared/products', locals: { taxon: @taxon, products: @products } %>
+</div>

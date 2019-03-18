@@ -1,0 +1,37 @@
+<% products = @products %>
+<% paginated_products = @paginated_products %>
+
+<% if products.any? %>
+  <div id="products" class="row productsGral" data-hook>
+    <% products.uniq.each do |product| %>
+      <% url = spree.product_url(product, taxon_id: @taxon.try(:id)) %>
+      <div id="product_<%= product.id %>" class="col l4 m6 col s12 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+        <div class="panel panel-default">
+          <% cache(@taxon.present? ? [I18n.locale, current_currency, @taxon, product] : [I18n.locale, current_currency, product]) do %>
+            <div class="panel-body center-align product-body">
+              <%= link_to product_image(product, itemprop: "image", class: 'responsive-img'), url, itemprop: 'url' %>
+            </div>
+            <h3><%= link_to truncate(product.name, length: 50), url, class: 'info', itemprop: "name", title: product.name %></h3>
+            <div class="prodActions">
+              <a class="waves-effect waves-light btn-flat precio">
+                <span class="priceN" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                  <span class="selling lead" itemprop="price"><%= display_price(product) %></span>
+                </span>
+                <span class="addProd">
+                  <i class="material-icons">add_shopping_cart</i> añadir
+                </span>
+              </a>
+              <%= link_to url, class: "waves-effect waves-light btn-flat" do %>
+                <span>detalles</span>
+                <i class="material-icons right">keyboard_arrow_right</i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <% reset_cycle("classes") %>
+  </div>
+<% end %>
+
+<%= paginate @paginated_products %>

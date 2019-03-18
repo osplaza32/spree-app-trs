@@ -1,0 +1,4 @@
+ID Compra,SKU Productos,Productos,Monto Total,Fecha
+<% @orders.each do |order| %>
+  <%= order.number %>,<% order.line_items.each do |product| %><%= product.sku + " [#{product.quantity}] " %><% end %>,<% order.line_items.each do |product| %><%= product.name.gsub(","," ").gsub('"',' ') + " " %><% end %>,<%= order.item_total %>,<%= order.completed_at.strftime("%Y-%m-%d %H:%M:%S") %>
+<% end %>

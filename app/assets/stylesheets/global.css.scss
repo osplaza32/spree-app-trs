@@ -1,0 +1,22 @@
+html {
+  line-height: 1.5;
+  font-family: 'Abel', sans-serif;
+  font-weight: normal;
+  color: $dark;
+}
+
+a {
+  color: $primary-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    line-height: 1.1;
+    font-family: 'Oswald', sans-serif;
+}
+
+.list-inline {
+  li {
+    display: inline-block;
+  }
+}

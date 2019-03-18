@@ -1,0 +1,15 @@
+<div>
+  <h5>Busque su producto:</h5>
+  <form>
+    <input name='q' <%= @q %> value='<%= @q %>' >
+    <button type='submit'>Buscar</button>
+  </form>
+</div>
+
+
+<% if @product %>
+  <h5>El Producto con SKU <%= p @q %> es:</h5>
+  <%= link_to @product.name, spree.product_url(@product) %>
+<% else %>
+  <h1>No se encontraron productos</h1>
+<% end %>

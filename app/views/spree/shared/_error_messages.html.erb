@@ -1,0 +1,21 @@
+<% if target && target.errors.any? %>
+  <div id="errorExplanation" class="alert alert-danger" data-hook>
+    <h3><%= Spree.t(:errors_prohibited_this_record_from_being_saved, :count => target.errors.count) %>:</h3>
+    
+     <ul>
+       <% target.errors.full_messages.each do |msg| %>
+        <%if msg.include? "Line items quantity"%>
+          <%msg.gsub! 'Line items quantity', 'La cantidad seleccionada esta fuera de stock'%>
+          <%msg.gsub! 'El articulo seleccionado esta fuera de stock.', ''%>
+          <li><%=msg%></li>            
+
+
+
+        <%else%>
+          <li><%=msg%></li>            
+        <%end%>         
+       <% end %>
+     </ul>
+     <br/>
+  </div>
+<% end %>

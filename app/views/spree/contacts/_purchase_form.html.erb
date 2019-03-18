@@ -1,0 +1,48 @@
+<div id="consulta-compra" class="col s12">
+  <div class="row contact">
+    <h3>Consulta de Compras</h3>
+    <%= form_for(@contact) do |f| %>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.label(:nombre, 'Nombre') %>
+          <%= f.text_field :nombre, required: true %>
+        </div>
+
+        <div class="input-field col s6">
+          <%= f.label(:apellido, 'Apellido') %>
+          <%= f.text_field :apellido, required: true %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.label :email %>
+          <%= f.text_field :email, required: true %>
+        </div>
+        <div class="input-field col s6">
+          <%= f.label(:telefono, 'Teléfono') %>
+          <%= f.text_field :telefono, required: true, class: 'validate' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.label(:id_compra, 'ID de Compra') %>
+          <%= f.text_field :id_compra, required: true, class: 'validate' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.label(:mensaje, 'Mensaje') %>
+          <%= f.text_area :mensaje, class: 'materialize-textarea', required: true %>
+        </div>
+      </div>
+
+      <%= f.button(type: 'submit', class: 'btn waves-effect waves-light') do %>
+        Enviar<i class="material-icons right">send</i>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>

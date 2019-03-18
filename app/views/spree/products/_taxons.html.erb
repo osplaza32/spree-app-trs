@@ -1,0 +1,20 @@
+<% if !@product.taxons.blank? %>
+  <div id="taxon-crumbs" data-hook class=" five ">
+    <div data-hook="product_taxons">
+      <ul class="list-group" id="similar_items_by_taxon" data-hook>
+        <% @product.taxons.each do |taxon| %>
+          <% if taxon.parent_id == 1 %>
+            <div class="titleCat">
+              <h2>
+                <%= link_to taxon.name, seo_url(taxon), class: 'breadcrumbs waves-effect waves-orange' %>
+              </h2>
+              <%= link_to seo_url(taxon), :class => 'waves-effect waves-light right btn' do %>
+                <i class="material-icons left">arrow_forward</i> ver mas productos
+              <% end %>
+            </div>  <%= render partial: 'spree/shared/products', locals: { products: taxon_preview(taxon, max=3), taxon: taxon } %>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+Nombre,Correo
+<% Spree::User.all.each do |user| %>
+  <% curr_user = Spree::Address.find_by(id: user.ship_address_id) %>
+  <% if curr_user != nil %>
+    <%= [curr_user.firstname,curr_user.lastname].join(" ") %>,<%= user.email %>
+  <% end %>
+<% end %>

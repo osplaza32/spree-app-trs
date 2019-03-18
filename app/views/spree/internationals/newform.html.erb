@@ -1,0 +1,52 @@
+
+<div class="container">
+  <div id="content" class="col s12" data-hook="">
+    <div id="checkout" data-hook="">
+      <div class="container" align="left" style="text-align:left" >
+        <div class="row">
+          <h1 data-hook="checkout_title">Realizar pedido</h1>
+        </div>
+        <div class="row">
+          <%= form_for(@international_order_form) do |f| %>
+            <div class="form-group">
+              <label for="order_email" class="active">Email del Cliente</label>
+              <%= f.text_field :email, required: true, class: 'form-control' %>
+            </div>
+            <p class="form-group" id="sfirstname">
+              <label for="name" class="active">
+              Nombre<abbr class="required" title="required">*</abbr>
+              </label>
+              <%= f.text_field :nombre, required: true, class: 'form-control' %>
+            </p>
+            <p class="form-group" id="slastname">
+              <label for="lastname" class="active">
+              Apellidos<abbr class="required" title="required">*</abbr>
+              </label>
+              <%= f.text_field :apellido, required: true, class: 'form-control' %>
+            </p>
+            <div class="row">
+              <label>Pais</label>
+              <select class="browser-default" name="international_order_form[pais]" >
+                <option value="">Seleccione su pais</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Peru">Perú</option>
+                <option value="Mexico">México</option>
+                <option value="Otros paises">Otro pais</option>
+              </select>
+            </div>
+            <%= f.hidden_field :pedido, value: @order_line , required: true, class: 'form-control' %>
+            <div id="btnform">
+              <%= f.button(class: 'disable-button-js btn waves-effect waves-light') do %>
+                Enviar<i class="material-icons right">>></i>
+              <%end%>
+            </div>
+          <%end%>
+          <% if flash[:notice] %>
+            <div class="alert alert-notice"><%= flash[:notice] %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+---
+development:
+  protocol: http
+  cgi_base_url: http://trs.tengorestriccion.cl/cgi-bin
+  tbk_root_path: "/root/cgi-bin"
+test:
+  protocol: http
+  cgi_base_url: http://trs.tengorestriccion.cl/cgi-bin
+  tbk_root_path: "/root/cgi-bin"
+staging:
+  protocol: http
+  cgi_base_url: http://staging.ktm-shop.cl/cgi-bin
+  tbk_root_path: "/var/www/cgi-bin"
+production:
+  protocol: http
+  cgi_base_url: http://www.ktm-shop.cl/cgi-bin
+  tbk_root_path: "/var/www/cgi-bin"

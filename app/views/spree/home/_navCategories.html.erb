@@ -1,0 +1,10 @@
+<ul class="categoriesGral">
+	<% @taxonomies.first.taxons.where(parent_id: 1).each do |taxon| %>
+			<li>
+				<%= link_to seo_url(taxon) do %> <!--<a href="#<%= taxon.name %>"><%= taxon.name %>-->
+					<%= taxon.name.upcase %>
+					<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+				<% end %>
+			</li>
+	<% end %>
+</ul>

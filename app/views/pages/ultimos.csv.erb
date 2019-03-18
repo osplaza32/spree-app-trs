@@ -1,0 +1,4 @@
+SKU, Nombre del producto, Fecha de creación, Fecha de modificación
+<% @products.each do |product| %>
+  <%= product.sku %>,<%= product.name.gsub(',',' ').gsub('"',' ') %>,<%= product.created_at %>,<%= product.updated_at %>
+<% end %>

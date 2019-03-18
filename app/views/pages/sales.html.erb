@@ -1,0 +1,8 @@
+<% @page_title = 'Ofertas' %>
+
+<% if @products != nil %>
+  <h1>Ofertas KTM-Shop</h1>
+  <%= render partial: 'spree/shared/products', :locals => { :products => @products } %>
+<% else %>
+  <h1>No se encontraron ofertas</h1>
+<% end %>

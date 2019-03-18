@@ -1,0 +1,34 @@
+<% if "spree/products" == params[:controller] && @taxon || !@taxonomies.empty? %>
+  <% content_for :sidebar do %>
+    <div data-hook="homepage_sidebar_navigation">
+      <% if "spree/products" == params[:controller] && @taxon %>
+        <%#= render :partial => 'spree/shared/filters' %>
+        <%= render :partial => 'spree/shared/subtaxon', :locals => { :taxon => @taxon } %>
+      <% else %>
+        <%= render :partial => 'spree/shared/taxonomies' %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+<% if params[:keywords] %>
+  <%
+    repuestos = Spree::Taxon.where(name: 'Repuesto para').first
+    if repuestos != nil
+      @found_taxon = Spree::Taxon.with_translations.where("LOWER(spree_taxon_translations.name) LIKE LOWER(?) AND spree_taxons.parent_id IN (?)","%#{params[:keywords]}%", repuestos.child_ids).first
+    end
+  %>
+
+  <div data-hook="search_results">
+    <% if @products.empty? %>
+      <h1 class="search-results-title"><%= Spree.t(:no_products_found) %></h1>
+    <% else %>
+      <%= render :partial => 'spree/shared/products', :locals => { :products => @products,:taxon_repuestos_para => @found_taxon ,:taxon => @taxon } %>
+    <% end %>
+  </div>
+<% else %>
+  <div data-hook="homepage_products">
+    <% cache(cache_key_for_products) do %>
+      <%= render :partial => 'spree/shared/products', :locals => { :products => @products.order(available_on: :desc), :taxon => @taxon } %>
+    <% end %>
+  </div>
+<% end %>

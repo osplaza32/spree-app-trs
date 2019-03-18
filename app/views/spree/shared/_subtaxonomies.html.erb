@@ -1,0 +1,21 @@
+<% childs = Spree::Taxon.where(parent_id: taxon.id) %>
+
+<div id="taxonomies" class="sidebar-item" data-hook>
+  <div class="list-group">
+  <% # Si tiene subcategorías (Childs) desplegarlos omitiendo los vacíos %>
+  <% if childs.any? %>
+    <% childs.each do |taxon|  %>
+      <% if taxon.products.available.any? %>
+        <%= link_to taxon.name, seo_url(taxon), class: 'list-group-item' %>
+      <% end %>
+    <% end %>
+  <% # Si no tiene subcategorías (Childs) desplegar a los hijos de su padre %>
+  <% else %>
+    <% Spree::Taxon.where(parent_id: taxon.parent_id).each do |taxon| %>
+      <% if taxon.products.available.any? %>
+        <%= link_to taxon.name, seo_url(taxon), class: 'list-group-item' %>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div>
+</div>

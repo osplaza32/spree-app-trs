@@ -1,0 +1,90 @@
+<%
+  paginated_products = @searcher.retrieve_products if params.key?(:keywords)
+  paginated_products ||= products
+%>
+
+<% content_for :google_analytics do %>
+
+  <% if params[:keywords] %>
+    ga('send','event', {
+      'eventCategory': 'productSearch',
+      'eventAction': 'search',
+      'eventLabel': '<%= params[:keywords] %>',
+      'eventValue': <%= paginated_products.count %>
+    });
+  <% end %>
+
+<% end %>
+
+
+<% content_for :head do %>
+  <% if paginated_products.respond_to?(:num_pages) %>
+    <%= rel_next_prev_link_tags paginated_products %>
+  <% end %>
+<% end %>
+
+<div data-hook="products_search_results_heading">
+  <% if products.empty? %>
+    <div data-hook="products_search_results_heading_no_results_found">
+      <%= Spree.t(:no_products_found) %>
+    </div>
+  <% elsif params.key?(:keywords) %>
+    <div data-hook="products_search_results_heading_results_found">
+      <h6 class="search-results-title"><%= Spree.t(:search_results, keywords: h(params[:keywords])) %></h6>
+    </div>
+  <% end %>
+</div>
+
+<% if products.any? %>
+  <div id="products" class="row productsGral" data-hook>
+    <% if defined?(taxon_repuestos_para) && taxon_repuestos_para != nil %>
+       <div id="product" class="col l4 m6 col s12" data-hook="products_list_item">
+         <div class="panel panel-default">
+           <div class="panel-body center-align product-body">
+             <%= link_to 'Ver Repuestos para '<< h(taxon_repuestos_para.name), seo_url(taxon_repuestos_para), class:'btn btn-cta' %>
+           </div>
+         </div>
+       </div>
+     <% end %>
+    <% products.each do |product| %>
+      <% url = spree.product_url(product, taxon_id: @taxon.try(:id)) %>
+      <div id="product_<%= product.id %>" class="col l4 m6 col s12 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+
+        <div class="panel panel-default">
+
+          <% cache(@taxon.present? ? [I18n.locale, current_currency, @taxon, product] : [I18n.locale, current_currency, product]) do %>
+            <div
+              class="panel-body center-align product-body
+              <%= 'dcto-' + product.discount_value.to_s unless product.discount_value === nil %> "
+            >
+              <%= image_tag("new-product.svg", class: 'new-product', alt: 'Producto Nuevo') if product.new? %>
+              <%= link_to product_image(product, itemprop: "image", class: 'responsive-img'), url, itemprop: 'url' %>
+            </div>
+            <h3><%= link_to truncate(product.name, length: 50), url, class: 'info', itemprop: "name", title: product.name %></h3>
+            <div class="prodActions">
+              <%= link_to url, class: "waves-effect waves-light btn-flat precio" do %>
+                <span class="priceN" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                  <span class="selling lead" itemprop="price"><%= display_price(product) %></span>
+                </span>
+                <!--<span class="addProd">
+                  <i class="material-icons">add_shopping_cart</i> añadir
+                </span>-->
+              <% end %>
+
+              <%= link_to url, class: "waves-effect waves-light btn-flat" do %>
+                <span>IR AL PRODUCTO</span>
+                <i class="material-icons right">keyboard_arrow_right</i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <% reset_cycle("classes") %>
+  </div>
+<% end %>
+
+
+<% if paginated_products.respond_to?(:num_pages) %>
+  <%= paginate paginated_products, theme: 'twitter-bootstrap-3' %>
+<% end %>

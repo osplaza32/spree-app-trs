@@ -1,0 +1,50 @@
+<div id="consultas-reclamos" class="col s12">
+  <div class="row contact">
+    <div class="center">
+      <h3>Consulta en Línea</h3>
+      <p>
+        Rellena tus datos a continuación para contactarte con nosotros.<br>
+        En caso de poseer ID de compra, te recomendamos mencionarla dentro del mensaje para una solución más rápida.
+      </p>
+
+    </div>
+    <%= form_for(@contact) do |f| %>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.label(:nombre, 'Nombre') %>
+          <%= f.text_field :nombre, required: true %>
+        </div>
+
+        <div class="input-field col s6">
+          <%= f.label(:apellido, 'Apellido') %>
+          <%= f.text_field :apellido, required: true %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.label(:email, 'E-Mail') %>
+          <%= f.text_field :email, required: true %>
+        </div>
+        <div class="input-field col s6">
+          <%= f.label(:telefono, 'Teléfono') %>
+          <%= f.text_field :telefono, required: true, class: 'validate' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.label(:mensaje, 'Mensaje') %>
+          <%= f.text_area :mensaje, class: 'materialize-textarea', required: true %>
+        </div>
+      </div>
+
+      <%= f.hidden_field :asunto, value: 'Consultas y reclamos' %>
+
+      <%= f.button(type: 'submit', class: 'btn waves-effect waves-light') do %>
+        Enviar<i class="material-icons right">send</i>
+      <% end %>
+
+    <% end %>
+  </div>

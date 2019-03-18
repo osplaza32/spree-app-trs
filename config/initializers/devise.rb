@@ -1,0 +1,2 @@
+# rubocop:disable Metrics/LineLength
+Devise.secret_key = '76f87d1cd224023deadf5fdb7eb791f730d9da7383449e5e04b720327b0c9abc6ac62a4a6e4abe19c6217a221f3696026348'

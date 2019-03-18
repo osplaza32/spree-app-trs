@@ -1,0 +1,5 @@
+<ul class="categoriesGral">
+	<% @taxonomies.first.taxons.where(parent_id: 1).each do |taxon| %>
+			<li><a href="#<%= taxon.name %>"><%= taxon.name %><i class="fa fa-angle-down"></i></a></li>
+	<% end %>
+</ul>

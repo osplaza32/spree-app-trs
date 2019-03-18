@@ -1,0 +1,8 @@
+Nombre,Apellidos,Miembro Desde,Rut,Direccion,Ciudad,Telefono,Ordenes,Total
+<% @users.each do |user| %>
+  <% if user.orders.complete.any? %>
+    <% user_data = Spree::Address.find(user.ship_address_id) # Datos del usuario %>
+    <% user_orders = Spree::Order.complete.where(user_id: user.id) # Ordenes del Usuario %>
+    <%= user_data.firstname.gsub(',',' ') %>,<%= user_data.lastname.gsub(',',' ') %>,<%= user.created_at %>,<%= user_data.rut.gsub(',',' ') %>,<%= user_data.address1.gsub(',',' ') %>,<%= user_data.city.gsub(',',' ') %>,<%= user_data.phone.gsub(',',' ') %>,<%= user.orders.count %>,<%= user_orders.sum(:total).to_i %>
+  <% end %>
+<% end %>

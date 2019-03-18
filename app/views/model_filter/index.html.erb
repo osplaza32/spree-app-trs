@@ -1,0 +1,265 @@
+<% @page_title = 'Repuestos por Modelo' %>
+
+<h3 class="center">Búsqueda por Modelo</h3>
+<p class="flow-text center bajada">
+  ¿Buscas una PowerPart específica para tu KTM?<br>
+  Aquí podrás encontrar recambios y partes especializadas para tu modelo de KTM.<br>
+  Selecciona la categoría, ingresa al modelo de tu motocicleta y navega por las distintas opciones que KTM-Shop.cl tiene para ti.
+</p>
+<section>
+  <!-- Row Container -->
+  <div class="row">
+    <!-- Travel -->
+    <% if @travel %>
+    <div class="col m6 s12">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <%= image_tag "bikes/travel-white.jpg", :class => 'activator' %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">BIG TRAIL<i class="fa fa-angle-double-up right" aria-hidden="true"></i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Modelos<i class="material-icons right">close</i></span>
+          <div class="collection">
+            <% @travel.each do |taxon| %>
+              <% if Spree::Product.in_taxon(taxon).any? %>
+                <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+              <% end %>
+            <% end %>
+            <%= link_to 'TODAS', @all_path, class: 'collection-item' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <!-- End Travel -->
+
+    <!-- MX -->
+    <% if @mx %>
+    <div class="col m6 s12">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <%= image_tag "bikes/mx-white.jpg", :class => 'activator' %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">MX<i class="fa fa-angle-double-up right" aria-hidden="true"></i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Modelos<i class="material-icons right">close</i></span>
+
+
+            <div class="row">
+              <div class="col m6 s6">
+                <div class="collection">
+                  <% @mx.first(10).each do |taxon| %>
+                    <% if Spree::Product.in_taxon(taxon).any? %>
+                      <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="col m6 s6">
+                <div class="collection">
+                  <% @mx.last(9).each do |taxon| %>
+                    <% if Spree::Product.in_taxon(taxon).any? %>
+                      <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+                    <% end %>
+                  <% end %>
+                  <%= link_to 'TODAS', @all_path, class: 'collection-item' %>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+    <!-- End MX -->
+
+    <!-- Free Ride -->
+    <% if @freeride %>
+    <div class="col m6 s12">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <%= image_tag "bikes/freeride-white.jpg", :class => 'activator' %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">FREE RIDE<i class="fa fa-angle-double-up right" aria-hidden="true"></i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Modelos<i class="material-icons right">close</i></span>
+
+            <div class="row">
+              <div class="col s12 m6">
+                <div class="collection">
+                  <% @freeride.each do |taxon| %>
+                    <% if Spree::Product.in_taxon(taxon).any? %>
+                      <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+                    <% end %>
+                  <% end %>
+                  <%= link_to 'TODAS', @all_path, class: 'collection-item' %>
+                </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <!-- End Freeride -->
+
+    <!-- Enduro -->
+    <% if @enduro %>
+    <div class="col m6 s12">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <%= image_tag "bikes/enduro-white.jpg", :class => 'activator' %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">ENDURO<i class="fa fa-angle-double-up right" aria-hidden="true"></i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Modelos<i class="material-icons right">close</i></span>
+
+          <div class="row">
+            <div class="col s6 m6">
+              <div class="collection">
+                <% @enduro.first(13).each do |taxon| %>
+                  <% if Spree::Product.in_taxon(taxon).any? %>
+                    <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="col s6 m6">
+              <div class="collection">
+                <% @enduro.last(12).each do |taxon| %>
+                  <% if Spree::Product.in_taxon(taxon).any? %>
+                    <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+                  <% end %>
+                <% end %>
+                <%= link_to 'TODAS', @all_path, class: 'collection-item' %>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <!-- End Enduro -->
+
+    <!-- SuperMoto -->
+    <% if @supermoto %>
+    <div class="col m6 s12">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <%= image_tag "bikes/supermoto-white.jpg", :class => 'activator' %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">SUPERMOTARD<i class="fa fa-angle-double-up right" aria-hidden="true"></i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Modelos<i class="material-icons right">close</i></span>
+          <div class="collection">
+            <% @supermoto.each do |taxon| %>
+              <% if Spree::Product.in_taxon(taxon).any? %>
+                <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+              <% end %>
+            <% end %>
+            <%= link_to 'TODAS', @all_path, class: 'collection-item' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <!-- End SuperMoto -->
+
+    <!-- Sports Tourer -->
+    <% if @sportstourer %>
+    <div class="col m6 s12">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <%= image_tag "bikes/sports-tourer-white.jpg", :class => 'activator' %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">SPORTS TOURER<i class="fa fa-angle-double-up right" aria-hidden="true"></i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Modelos<i class="material-icons right">close</i></span>
+          <div class="collection">
+            <% @sportstourer.each do |taxon| %>
+              <% if Spree::Product.in_taxon(taxon).any? %>
+                <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+              <% end %>
+            <% end %>
+            <%= link_to 'TODAS', @all_path, class: 'collection-item' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <!-- End Sports Tourer -->
+
+    <!-- Naked -->
+    <% if @naked %>
+    <div class="col m6 s12">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <%= image_tag "bikes/naked-white.jpg", :class => 'activator' %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">NAKED<i class="fa fa-angle-double-up right" aria-hidden="true"></i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Modelos<i class="material-icons right">close</i></span>
+          <div class="collection">
+            <% @naked.each do |taxon| %>
+              <% if Spree::Product.in_taxon(taxon).any? %>
+                <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+              <% end %>
+            <% end %>
+            <%= link_to 'TODAS', @all_path, class: 'collection-item' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <!-- End Naked -->
+
+    <!-- SuperSports -->
+    <% if @supersports %>
+    <div class="col m6 s12">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <%= image_tag "bikes/supersports-white.jpg", :class => 'activator' %>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">SUPERSPORTS<i class="fa fa-angle-double-up right" aria-hidden="true"></i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Modelos<i class="material-icons right">close</i></span>
+          <div class="collection">
+            <% @supersports.each do |taxon| %>
+              <% if Spree::Product.in_taxon(taxon).any? %>
+                <%= link_to taxon.name, seo_url(taxon), class: 'collection-item' %>
+              <% end %>
+            <% end %>
+            <%= link_to 'TODAS', @all_path, class: 'collection-item' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <!-- End SuperSports -->
+
+
+  </div>
+  <!-- End Row Container -->
+
+
+</section>

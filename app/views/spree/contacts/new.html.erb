@@ -1,0 +1,26 @@
+<% @page_title = 'Consulta en Línea' %>
+
+<% content_for :splash do %>
+  <section>
+    <div class="parallax-container section scrollspy titlePage" id="top">
+      <div class="overlay"></div>
+      <ul class="categoriesGral">
+        <li><a href="#contacto"><h3>Consulta en Línea</h3></a></li>
+      </ul>
+       <img class="ktmBottom" src="<%= image_url "ktm_home.png" %>" alt="KTM">
+       <div class="parallax"><%= image_tag "bg-parallax.jpg" %></div>
+   </div>
+  </section>
+<% end %>
+
+
+<div class="container">
+  <div class="contact-info">
+
+
+    <%= render partial: 'general_form' %>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<% # HEADERS %>
+SKU,Producto,Precio,Stock Total
+<% @products.each do |product| %>
+  <%= product.sku %>,<%= product.name.gsub(",",".").gsub('"',"") %>,<%= product.price.to_i %>,<%= product.total_on_hand %>
+  <% product.variants.each do |variant| %>
+  <%= variant.sku %>,<%= product.name.gsub(",",".").gsub('"',"") %>,<%= variant.price.to_i %>,<%= variant.total_on_hand %>
+  <% end %>
+<% end %>

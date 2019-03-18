@@ -1,0 +1,43 @@
+
+<% content_for :splash do %>
+  <section <% if current_page?(root_url) %> id ="fixindex" <% end %>>
+    <div class="parallax-container section scrollspy" id="top">
+      <div class="overlay"></div>
+       <%= render partial: 'site_sections' %>
+       <img class="ktmBottom" src="<%= image_url "ktm_home.png" %>" alt="KTM">
+       <div class="parallax"><%= image_tag "bg-parallax.jpg" %></div>
+   </div>
+  </section>
+<% end %>
+
+<div class="row webpay">
+  <div class="center col m6 s12">
+    <img src="<%= image_url "webpay.png" %>" alt="Webpay" class="responsive-img">
+    <% if @request_from_international_customer %>
+      <img src="<%= image_url "paypal.png" %>" alt="Paypal" height="70" width="70" class="responsive-img">
+      <img src="<%= image_url "money.png" %>" alt="Money" height="70" width="70" class="responsive-img">
+    <% end %>
+  </div>
+</div>
+<% cache [I18n.locale, current_currency, @product] do %>
+  <div data-hook="homepage_products">
+    <% cache(cache_key_for_products) do %>
+    <div class="main">
+          <div class="container">
+            <section class="catGral">
+              <% if Rails.env.production? || Rails.env.staging? %>
+                <%= render partial: 'category', :locals => { :taxon => @powerparts } %>
+                <%= render partial: 'category', :locals => { :taxon => @vestuario } %>
+                <%= render partial: 'category', :locals => { :taxon => @accesorios } %>
+                <%= render partial: 'category', :locals => { :taxon => @offroad } %>
+                <%= render partial: 'category', :locals => { :taxon => @kids } %>
+                <%= render partial: 'category', :locals => { :taxon => @street } %>
+              <% else %>
+                <%= render partial: 'categories', :locals => { :categories => @categories } %>
+              <% end %>
+            <section>
+          </div>
+        </div>
+    <% end %>
+  </div>
+<% end %>

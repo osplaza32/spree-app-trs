@@ -1,0 +1,54 @@
+<% if @request_from_international_customer %>
+  <ul class="categoriesGral international">
+<% else %>
+  <ul class="categoriesGral">
+<% end %>
+  <li>
+    <%= link_to products_path do %>
+      PRODUCTOS
+      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to '/t/categorias/bicicletas' do %>
+      BICICLETAS
+      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to '/modelos' do %>
+      BÚSQUEDA POR MODELOS
+      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    <% end %>
+  </li>
+
+  <li>
+    <%= link_to '/ofertas' do %>
+      OFERTAS
+      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    <% end %>
+  </li>
+
+  <!--<li>
+    <%= link_to '/consultas' do %>
+      CONSULTAS
+      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    <% end %>
+  </li>-->
+
+  <li>
+    <%= link_to '/contacto' do %>
+      CONSULTA EN LÍNEA
+      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    <% end %>
+  </li>
+  <% if @request_from_international_customer %>
+    <li>
+      <%=link_to '/international_orders' do %>
+      Ventas Internacionales
+      <i class="fa fa-angle-double-right " aria-hidden="true"></i>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

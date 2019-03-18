@@ -1,0 +1,112 @@
+
+<% if current_page?(root_url) %>
+<div id="top-navBar">
+   <%= render partial: 'spree/shared/ofertas' %>
+<% end %>
+
+
+<header>
+  <div class="navbar-fixed">
+    <nav class="topBar">
+      <div class="nav-wrapper">
+        <div class="container">
+          <div class="brand-logo center hide-on-med-and-down"><%= logo %></div>
+          <div class="brand-logo right hide-on-large-only">  <%= logo %></div>
+           <ul class="left">
+             <li>
+               <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+             </li>
+           </ul>
+
+          <ul class="left hide-on-med-and-down">
+            <li><a href="#"><img src="<%= image_url "logo-trs.svg" %>" class="logo-trs" alt="TRS | The racing shop" title="The Racing Shop"></a></li>
+            <li><a href="https://www.facebook.com/KTMChile/?fref=ts" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/KTMChile" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://www.youtube.com/user/ktm" target="_blank"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <%= form_tag spree.products_path, :method => :get, class: "navbar-form search" do %>
+                <div class="form-group left">
+                  <%= search_field_tag :keywords, params[:keywords], :placeholder => Spree.t(:search), class: "form-control" %>
+                </div>
+                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '/cart' do %>
+                CARRO
+                <% if current_order %>
+                  <%= content_tag(:span,'(' + current_order.item_count.to_s + ')') unless current_order.item_count === 0 %>
+                <% end %>
+                <i class="fa fa-shopping-cart"></i>
+              <% end %>
+            </li>
+          </ul>
+          <ul class="side-nav" id="nav-mobile">
+            <ul class="socials">
+              <li><a href="https://www.facebook.com/KTMChile/?fref=ts" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="https://twitter.com/KTMChile" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="https://www.youtube.com/user/ktm" target="_blank"><i class="fa fa-youtube"></i></a></li>
+            </ul>
+              <!-- Search bar -->
+              <li>
+                <%= form_tag spree.products_path, :method => :get, class: "navbar-form search" do %>
+                  <div class="form-group left">
+                    <%= search_field_tag :keywords, params[:keywords], :placeholder => Spree.t(:search), class: "form-control" %>
+                  </div>
+                  <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                <% end %>
+              </li>
+              <!-- End search bar -->
+              <li><%= link_to '/cart' do %> CARRO <i class="fa fa-shopping-cart"></i> <% end %></li>
+              <li class="divider"></li>
+              <li><%= link_to "HOME", :root %></li>
+              <li><%= link_to 'BUSQUEDA POR MODELO', '/modelos' %></li>
+              <li><%= link_to "OFERTAS", '/ofertas' %></li>
+              <!-- Categorías Mobile -->
+              <li class="productsNav"><%= link_to 'PRODUCTOS', products_path %>
+                <ul class='subNavProd'>
+                  <% Spree::Taxonomy.first.taxons.where(parent_id: 1).each do |taxon| %>
+                      <%= content_tag(:li, link_to(taxon.name.upcase, seo_url(taxon)) )  %>
+                  <% end %>
+                </ul>
+              </li>
+              <li><%= link_to "OFERTAS", '/ofertas' %></li>
+              <li><%= link_to "CONSULTA EN LÍNEA", '/contacto' %></li>
+              <li><%= link_to 'BUSQUEDA POR MODELO', '/modelos' %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+  <% if current_page?(root_url) %>
+</div>
+  <%end%>
+
+<%= yield :splash %>
+
+<div class="bottom-navBarSeparator"></div>
+
+<nav class="navBar hide-on-med-and-down" id="bottom-navBar">
+  <div class="nav-wrapper">
+    <div class="container">
+      <ul class="center">
+        <li><%= link_to "HOME", :root %></li>
+        <li>|</li>
+        <li class="productsNav"><%= link_to 'PRODUCTOS', products_path %>
+          <ul class='subNavProd'>
+            <%= render :partial => 'spree/shared/products_nav' %>
+          </ul>
+        </li>
+        <li>|</li>
+        <li><%= link_to "OFERTAS", '/ofertas' %></li>
+        <li>|</li>
+        <li><%= link_to "REPUESTOS POR MODELO", '/modelos' %></li>
+        <li>|</li>
+        <li><%= link_to "CONSULTA EN LÍNEA", '/contacto' %></li>
+      </ul>
+    </div>
+  </div>
+</nav>

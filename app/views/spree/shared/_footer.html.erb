@@ -1,0 +1,49 @@
+<% @taxonomies = Spree::Taxonomy.all %>
+<footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m4"><a href="http://www.theracingshop.cl" target="_blank"><img src="<%= image_url "logo-trs.svg" %>" class="logo-trs logo" alt="TRS | The racing shop" title="The Racing Shop"></a></div>
+        <div class="col s12 m4"><a href="http://www.spaarwater.cl/" target="_blank"><img src="<%= image_url "rsl-logo.png" %>" class="responsive-img logo" alt="Roland Spaarwater Ltda" title="Roland Spaarwater Ltda"></a></div>
+        <div class="col s12 m4"><%= link_to (image_tag("logo-ktm-white.svg", :class => 'logo')), "http://www.ktm.cl/", :class => 'brand-logo center' %></div>
+      </div>
+        <div class="row">
+          <div class="col s12 col s12 offset-m3 m3">
+            <ul class="block-list">
+              <li><%= link_to "HOME", :root %></li>
+              <li><%= link_to "REPUESTOS POR MODELO", '/modelos' %></li>
+              <li><%= link_to "PRODUCTOS", :products %></li>
+              <li><%= link_to "CONTACTO", '/contacto' %></li>
+              <li><%= link_to "TERMINOS Y CONDICIONES", '/terminos' %></li>
+            </ul>
+          </div>
+          <div class="col s12 m3">
+            <ul class="block-list">
+              <% @taxonomies.first.taxons.where(parent_id: 1).each do |taxon| %>
+                  <li>
+                    <%= link_to taxon.name, seo_url(taxon) %>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+      </div>
+      <div class="row">
+        <ul class="socials center col m4 s12">
+          <li><a href="https://www.facebook.com/KTMChile/?fref=ts" target="_blank"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="https://twitter.com/KTMChile" target="_blank"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="https://www.youtube.com/user/ktm" target="_blank"><i class="fa fa-youtube"></i></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row webpay">
+      <div class="center col m4 s12">
+        <img src="<%= image_url "webpay.png" %>" alt="Webpay" class="responsive-img">
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <div class="container center-align">
+      © Copyright 2016 KTM Chile, todos los derechos reservados | Desarrollado por <a href="http://www.santiagolab.cl" target="_blank">SantiagoLab</a>
+      </div>
+    </div>
+</footer>

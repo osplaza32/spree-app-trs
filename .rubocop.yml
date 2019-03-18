@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - 'config/unicorn.rb'
+    - 'config/environments/*'
+    - 'app/controllers/spree/**/*'
+    - 'lib/spree/**/*'
+    - 'db/**/*'
+    - 'vendor/**/*'
+    - 'Gemfile'
+Rails:
+  Enabled: true
+Metrics/AbcSize:
+  Enabled: false
+Metrics/LineLength:
+  Max: 100

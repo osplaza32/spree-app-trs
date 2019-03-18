@@ -1,0 +1,40 @@
+<% if taxon %>
+  <section class="catGral">
+      <div id="<%= taxon.name %>" class="titleCat scrollspy">
+        <h2><%= taxon.name %></h2>
+        <%= link_to seo_url(taxon), :class => 'waves-effect waves-light right btn' do %>
+          <i class="material-icons left">arrow_forward</i> ver mas productos
+        <% end %>
+      </div>
+
+      <div class="productsGral section row">
+      <% taxon_preview(taxon, max=3).each do |product| %>
+        <div class="col l4 m6 s12 product-list-item">
+            <div class="panel panel-default">
+              <div
+                class="panel-body center-align product-body
+                <%= 'dcto-' + product.discount_value.to_s unless product.discount_value === nil %>
+              ">
+                <% url = spree.product_url(product, taxon_id: @taxon.try(:id)) %>
+                <%= image_tag("new-product.svg", class: 'new-product', alt: 'Producto Nuevo') if product.new? %>
+                <%= link_to product_image(product, itemprop: "image", class: 'responsive-img'), url, itemprop: 'url' %>
+              </div>
+              <h3>
+                <%= link_to truncate(product.name, length: 50), url, class: 'info', itemprop: "name", title: product.name %>
+              </h3>
+              <div class="prodActions">
+                <a class="waves-effect waves-light btn-flat precio">
+                  <span class="priceN"><%= display_price(product) %></span>
+                </a>
+
+                <%= link_to url, class: "waves-effect waves-light btn-flat" do %>
+                  <span>Ir al Producto</span>
+                  <i class="material-icons right">keyboard_arrow_right</i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+      </div>
+  </section>
+<% end %>

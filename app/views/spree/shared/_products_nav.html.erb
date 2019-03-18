@@ -1,0 +1,9 @@
+<% categories = Spree::Taxonomy.first.taxons.where(parent_id: 1) %>
+<% categories.each do |taxon| %>
+    <a href="<%=seo_url(taxon)%>" class ="linksublinkclass"><%=taxon.name.upcase%><br><!--<img src="<%#=image_url "ktm_home.png"%>#" id="img-sublink-<%=taxon.name.upcase%>">--></a>	
+
+
+    <% unless taxon == categories.last %>
+      <li style="padding-top:25px;font-size:50px;" class="linea">|</li>
+    <% end %>
+<% end %>

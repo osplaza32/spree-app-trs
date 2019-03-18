@@ -1,0 +1,30 @@
+<table class="row header mailKtm">
+  <tr>
+    <td>
+      <h5 class="lede">
+        <%= Spree.t('order_mailer.cancel_email.dear_customer') %>
+      </h5>
+      <p>
+        <%= Spree.t('order_mailer.cancel_email.instructions') %>
+      </p>
+      <h6>
+        <%= Spree.t('order_mailer.cancel_email.order_summary_canceled', number: @order.number) %>
+      </h6>
+      <table class="container striped">
+        <tr>
+          <td class="wrapper last">
+            <table class="twelve columns">
+              <%= render collection: @order.line_items, partial: 'spree/shared/mailer_line_item', as: :line_item %>
+              <%= render 'spree/order_mailer/subtotal', order: @order %>
+              <% @order.adjustments.eligible.each do |adjustment| %>
+                <%= render 'spree/order_mailer/adjustment', adjustment: adjustment %>
+              <% end %>
+              <%= render 'spree/order_mailer/total', order: @order %>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td class="expander"></td>
+  </tr>
+</table>

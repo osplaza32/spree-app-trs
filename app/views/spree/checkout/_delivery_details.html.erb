@@ -1,0 +1,18 @@
+<div class="steps-data">
+  <% if order.has_step?("address") %>
+    <div class="row" data-hook="order-bill-address">
+      <div class="col m12">
+        <h4>Datos <%= link_to "#{Spree.t(:edit)}", checkout_state_path(:address) unless order.completed? %></h4>
+        <%= render 'spree/shared/address', address: order.bill_address %>
+      </div>
+    </div>
+
+    <div class="row gone" data-hook="order-ship-address" >
+      <div class="col m12">
+        <h4><%= Spree.t(:shipping_address) %> <%= link_to "#{Spree.t(:edit)}", checkout_state_path(:address) unless order.completed? %></h4>
+        <%= render 'spree/shared/address', address: order.ship_address %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<hr />
